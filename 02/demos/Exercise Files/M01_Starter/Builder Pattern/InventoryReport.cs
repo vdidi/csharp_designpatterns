@@ -37,4 +37,13 @@ namespace Builder_Pattern
                 .ToString();
         }
     }
+
+    public interface IFurnitureInventoryReport 
+    {
+        void AddTitle();
+        void AddDimension();
+        void AddLogistics();
+
+        InventoryReport GetDailyReport();
+    }
 }
