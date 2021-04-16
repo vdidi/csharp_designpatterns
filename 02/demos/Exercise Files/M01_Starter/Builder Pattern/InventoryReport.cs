@@ -43,7 +43,7 @@ namespace Builder_Pattern
     {
         void AddTitle();
         void AddDimension();
-        void AddLogistics();
+        void AddLogistics(DateTime dateTime);
 
         InventoryReport GetDailyReport();
     }
@@ -85,6 +85,23 @@ namespace Builder_Pattern
 
         public void Reset() {
             _report = new InventoryReport();
+        }
+    }
+
+    public class InventoryBuilderDirector
+    {
+        private IFurnitureInventoryBuilder _builder;
+
+        public InventoryBuilderDirector(IFurnitureInventoryBuilder concreteBuilder)
+        {
+            _builder = concreteBuilder;
+        }
+
+        public void BuildCompleteReport()
+        {
+            _builder.AddTitle();
+            _builder.AddDimension();
+            _builder.AddLogistics(DateTime.Now);
         }
     }
 }
