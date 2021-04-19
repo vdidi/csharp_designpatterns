@@ -39,7 +39,7 @@ namespace Factory_Pattern_First_Look
             order.LineItems.Add(new Item("CONSULTING", "Building a website", 100m), 1);
             #endregion
 
-            var cart = new ShoppingCart(order);
+            var cart = new ShoppingCart(order, new GlobalShippingProviderFactory());
 
             var shippingLabel = cart.Finalize();
 
