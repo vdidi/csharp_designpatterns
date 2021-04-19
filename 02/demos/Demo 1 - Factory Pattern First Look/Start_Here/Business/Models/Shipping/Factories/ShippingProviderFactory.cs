@@ -1,8 +1,19 @@
-namespace Start_Here.Business.Models.Shipping
+namespace Start_Here.Business.Models.Shipping.Factories
 {
-    public class ShippingProviderFactory
+    public abstract class ShippingProviderFactory
     {
-        public static ShippingProvider CreateShippingProvider(string country)
+        public abstract ShippingProvider CreateShippingProvider(string country);
+
+        public ShippingProvider GetShippingProvider(string country)
+        {
+            var provider = CreateShippingProvider(country);
+
+            return provider;
+        }
+    }
+    public class StandardShippingProviderFactory : ShippingProviderFactory
+    {
+        public override ShippingProvider CreateShippingProvider(string country)
         {
             #region Create Shipping Provider
             ShippingProvider shippingProvider;
@@ -73,6 +84,14 @@ namespace Start_Here.Business.Models.Shipping
             #endregion
 
             return shippingProvider;
+        }
+    }
+
+    public class GlobalShippingProviderFactory : ShippingProviderFactory
+    {
+        public override ShippingProvider CreateShippingProvider(string country)
+        {
+            return new GlobalShippingProviderFactory();
         }
     }
 }
